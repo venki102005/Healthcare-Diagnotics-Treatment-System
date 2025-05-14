@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Disease Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f4f8;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            font-size: 16px;
+        }
+        
+        input[type="submit"] {
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+        
+        .result {
+            margin-top: 20px;
+            background-color: #e0f7fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Disease Diagnosis System</h1>
+    <form method="POST">
+        <label for="symptoms">Enter symptoms (comma-separated):</label><br>
+        <input type="text" name="symptoms" id="symptoms" required>
+        <input type="submit" value="Diagnose">
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <h2>Possible Diagnoses and Treatments:</h2>
+        <ul>
+            {% for disease, treatment in result %}
+            <li><strong>{{ disease }}:</strong> {{ treatment }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif result is not none %}
+    <div class="result">
+        <p>No matching diseases found for the given symptoms.</p>
+    </div>
+    {% endif %}
+</body>
+
+</html>
